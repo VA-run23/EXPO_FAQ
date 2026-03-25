@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Constitutional Amendment Suggestion Platform — Team D-05, NIE Mysuru</title>
+  <meta name="description" content="A GitHub-inspired civic engagement platform for constitutional discourse. Bronze Medal Winner, Innovista 2.0, NIE Mysuru." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --ink:       #1a1a2e;
+      --ink-soft:  #3d3d5c;
+      --ink-muted: #7a7a9a;
+      --paper:     #faf9f6;
+      --cream:     #f2efe8;
+      --rule:      #d8d4c8;
+      --saffron:   #e07b2a;
+      --green:     #2d6a4f;
+      --green-light: #52b788;
+      --navy:      #14213d;
+      --gold:      #c9a84c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-rule {
+      height: 5px;
+      background: linear-gradient(90deg, var(--saffron) 33.3%, #ffffff 33.3% 66.6%, var(--green) 66.6%);
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 clamp(1.5rem, 5vw, 5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; color: var(--ink-muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.88rem; color: var(--ink-soft);
+      text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--saffron); }
+
+    .hero {
+      max-width: 860px; margin: 0 auto;
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 2rem) clamp(3rem, 6vw, 5rem);
+      text-align: center;
+    }
+    .hero-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 1.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    }
+    .hero-kicker::before, .hero-kicker::after {
+      content: ''; display: block; width: 40px; height: 1px; background: var(--rule);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700;
+      line-height: 1.15; color: var(--navy);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+    }
+    .hero h1 em { font-style: italic; color: var(--saffron); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem); color: var(--ink-soft);
+      max-width: 600px; margin: 0 auto 2.5rem; font-weight: 300;
+    }
+    .award-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: linear-gradient(135deg, #fff8e8, #fef0cc);
+      border: 1px solid var(--gold); border-radius: 2px;
+      padding: 0.6rem 1.2rem;
+      font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: #7a5c1a;
+      margin-bottom: 2.5rem; box-shadow: 0 2px 8px rgba(201,168,76,0.15);
+    }
+    .award-badge .medal { font-size: 1.2rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--navy); color: #fff; text-decoration: none;
+      padding: 0.75rem 1.75rem; font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem; border-radius: 2px;
+      transition: background 0.2s, transform 0.15s; letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: var(--saffron); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--ink-soft); text-decoration: none;
+      padding: 0.75rem 1.75rem; font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem; border: 1px solid var(--rule); border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--ink-soft); color: var(--ink); transform: translateY(-1px); }
+
+    .section-rule { max-width: 860px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 2rem); }
+    .section-rule hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+    section {
+      max-width: 860px; margin: 0 auto;
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 2rem);
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600;
+      color: var(--navy); margin-bottom: 1.5rem; line-height: 1.25;
+    }
+    .section-body {
+      color: var(--ink-soft); font-size: 1rem; max-width: 640px; font-weight: 300;
+    }
+
+    .problem-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 2.5rem 0;
+    }
+    .stat-cell { background: var(--paper); padding: 1.75rem 1.5rem; text-align: center; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+      color: var(--saffron); line-height: 1; margin-bottom: 0.4rem;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--ink-muted); font-weight: 300; letter-spacing: 0.02em; }
+
+    .blockquote-pull {
+      border-left: 3px solid var(--saffron); margin: 2rem 0;
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.15rem; color: var(--ink-soft); line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 2rem;
+    }
+    .feature-card { background: var(--paper); padding: 1.75rem 1.5rem; transition: background 0.2s; }
+    .feature-card:hover { background: var(--cream); }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+    .feature-title {
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .feature-desc { font-size: 0.88rem; color: var(--ink-muted); font-weight: 300; line-height: 1.6; }
+
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tech-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      padding: 0.35rem 0.85rem; border: 1px solid var(--rule); border-radius: 2px;
+      color: var(--ink-soft); background: var(--cream); letter-spacing: 0.04em;
+    }
+    .tech-tag.highlight { border-color: var(--green); color: var(--green); background: #f0faf5; }
+
+    /* ── LEGAL / FAQ SECTION ── */
+    .defense-intro {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--green);
+      border-radius: 2px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .defense-intro strong { color: var(--ink); font-weight: 600; }
+
+    .articles-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 2rem 0;
+    }
+    .article-card { background: var(--paper); padding: 1.5rem; transition: background 0.2s; }
+    .article-card:hover { background: var(--cream); }
+    .article-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.5rem; display: block;
+    }
+    .article-name {
+      font-family: 'Playfair Display', serif; font-size: 0.95rem;
+      font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.3;
+    }
+    .article-desc { font-size: 0.85rem; color: var(--ink-muted); font-weight: 300; line-height: 1.6; }
+
+    .laws-list { margin: 2rem 0; display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .law-row { background: var(--paper); padding: 1.25rem 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.2s; }
+    .law-row:hover { background: var(--cream); }
+    .law-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--saffron); background: #fff8f0; border: 1px solid #f0d4b0;
+      padding: 0.2rem 0.5rem; border-radius: 2px; white-space: nowrap;
+      flex-shrink: 0; margin-top: 0.2rem;
+    }
+    .law-content {}
+    .law-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.35rem; }
+    .law-desc { font-size: 0.85rem; color: var(--ink-muted); font-weight: 300; line-height: 1.6; }
+
+    /* FAQ accordion */
+    .faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    details { background: var(--paper); }
+    details:hover { background: var(--cream); }
+    summary {
+      padding: 1.25rem 1.5rem;
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
+      color: var(--navy); cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: color 0.2s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+'; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem; color: var(--ink-muted); transition: transform 0.2s;
+    }
+    details[open] summary::after { content: '-'; }
+    details[open] summary { color: var(--saffron); }
+    .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.95rem; color: var(--ink-soft); font-weight: 300;
+      line-height: 1.8; border-top: 1px solid var(--rule);
+    }
+    .faq-answer p { margin-top: 0.75rem; }
+    .faq-answer strong { color: var(--ink); font-weight: 600; }
+
+    /* one-paragraph defense */
+    .defense-para {
+      background: var(--navy); color: #e8e8f0;
+      border-radius: 2px; padding: 2rem 2.25rem; margin-top: 2.5rem;
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.05rem; line-height: 1.85; position: relative;
+    }
+    .defense-para::before {
+      content: '"'; font-size: 5rem; color: rgba(255,255,255,0.08);
+      position: absolute; top: -0.5rem; left: 1.25rem; line-height: 1;
+    }
+
+    /* LinkedIn */
+    .linkedin-card {
+      background: var(--cream); border: 1px solid var(--rule);
+      border-radius: 2px; padding: 2rem 2rem 1.5rem; margin-top: 2rem; position: relative;
+    }
+    .linkedin-card::before {
+      content: '"'; font-family: 'Playfair Display', serif; font-size: 5rem;
+      color: var(--rule); position: absolute; top: -0.5rem; left: 1.5rem; line-height: 1;
+    }
+    .linkedin-text {
+      font-size: 0.95rem; color: var(--ink-soft); font-weight: 300;
+      line-height: 1.8; white-space: pre-line;
+    }
+    .linkedin-text strong { color: var(--ink); font-weight: 600; }
+
+    .qr-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;
+    }
+    .qr-card {
+      border: 1px solid var(--rule); background: var(--paper);
+      padding: 2rem; text-align: center; border-radius: 2px;
+    }
+    .qr-card canvas, .qr-card img { margin: 0 auto 1rem; display: block; }
+    .qr-title {
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.35rem;
+    }
+    .qr-url { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--ink-muted); word-break: break-all; }
+
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 2rem;
+    }
+    .team-card { background: var(--paper); padding: 1.75rem 1.25rem; text-align: center; transition: background 0.2s; }
+    .team-card:hover { background: var(--cream); }
+    .team-avatar {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff;
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+    }
+    .team-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+    .team-usn { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .team-role { font-size: 0.8rem; color: var(--ink-muted); font-weight: 300; }
+
+    .disclaimer {
+      background: #fff8f0; border: 1px solid #f0d4b0;
+      border-left: 3px solid var(--saffron); padding: 1.25rem 1.5rem; border-radius: 2px;
+      margin-top: 2rem; font-size: 0.88rem; color: #7a4a1a; font-weight: 300; line-height: 1.65;
+    }
+    .disclaimer strong { font-weight: 600; }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 2rem);
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-left {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+      color: var(--ink-muted); letter-spacing: 0.06em; line-height: 1.8;
+    }
+    .footer-right { font-size: 0.82rem; color: var(--ink-muted); font-weight: 300; }
+    .footer-flag { font-size: 1.1rem; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeUp 0.6s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero > *:nth-child(3) { animation-delay: 0.25s; }
+    .hero > *:nth-child(4) { animation-delay: 0.35s; }
+    .hero > *:nth-child(5) { animation-delay: 0.45s; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .problem-stats { grid-template-columns: 1fr; }
+      .qr-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-rule"></div>
+
+  <nav>
+    <span class="nav-brand">V4 VIKSIT BHARAT &nbsp;/&nbsp; NIE Mysuru &nbsp;/&nbsp; CSE</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#legal">Legal</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-kicker">V4 VIKSIT BHARAT &nbsp;·&nbsp; 2025-26 &nbsp;·&nbsp; NIE Mysuru</p>
+    <h1>Digital Constitutional<br/><em>Amendment Suggestion Platform</em></h1>
+    <p class="hero-sub">
+      A GitHub-inspired civic engagement platform where citizens, legal experts,
+      and lawmakers collaborate on constitutional discourse, transparently and accountably.
+    </p>
+    <div class="award-badge">
+      <span class="medal">🥉</span>
+      Bronze Medal &nbsp;·&nbsp; Innovista 2.0, NIE Mysuru &nbsp;·&nbsp; 28 November 2025
+    </div>
+    <div class="hero-ctas">
+      <a href="https://d-05-minor-project.netlify.app" target="_blank" rel="noopener" class="btn-primary">
+        ⚖️ &nbsp;Live Platform
+      </a>
+    </div>
+  </div>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">The Problem</p>
+    <h2 class="section-title">India's Constitution has 448 articles.<br/>Citizens have zero structured voice in discussing them.</h2>
+    <div class="problem-stats">
+      <div class="stat-cell">
+        <div class="stat-number">448</div>
+        <div class="stat-label">Constitutional Articles</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">106</div>
+        <div class="stat-label">Amendments since 1950</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">1.5/yr</div>
+        <div class="stat-label">Average amendment rate</div>
+      </div>
+    </div>
+    <p class="section-body">
+      India's constitutional amendment process is highly centralized, relying exclusively on elected
+      representatives. Citizens have no structured channel to engage in constitutional discourse.
+      Expert legal knowledge and collective public input remain underutilized. Existing platforms like
+      MyGov.in address policy feedback, not constitutional participation. We built the missing infrastructure.
+    </p>
+    <blockquote class="blockquote-pull">
+      "WE THE PEOPLE OF INDIA" — transforming preamble text into participatory reality.
+    </blockquote>
+    <div class="disclaimer">
+      <strong>Educational Project Notice:</strong> This platform is an academic project developed by
+      students of NIE Mysuru. It is not affiliated with or endorsed by the Government of India or any
+      constitutional authority. To maintain platform integrity without active moderation, new post
+      creation is currently disabled for public visitors. Users may explore the Constitution, read
+      existing discussions, agree/disagree on proposals, and use the AI assistant freely.
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <p class="section-label">Platform Features</p>
+    <h2 class="section-title">Built for accountability,<br/>designed for participation.</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📖</span>
+        <div class="feature-title">Constitution Repository</div>
+        <div class="feature-desc">Every article accessible as structured, readable data. Browse all 448 articles and linked citizen discussions.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">Immutable Discussions</div>
+        <div class="feature-desc">Modeled after GitHub Issues. No edits, no deletes after posting. Permanent accountability for every statement made.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🗳️</span>
+        <div class="feature-title">Agree / Disagree Voting</div>
+        <div class="feature-desc">Citizens vote on amendment suggestions. Each user votes once per post. Real-time counts reflect public sentiment.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚖️</span>
+        <div class="feature-title">Expert Validation Layer</div>
+        <div class="feature-desc">Verified legal professionals review suggestions and add authoritative commentary, clearly distinguished from citizen posts.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <div class="feature-title">NiyamAI — Constitutional Assistant</div>
+        <div class="feature-desc">Powered by Google Gemini. Answers queries on articles, amendments, and landmark judgments with full constitutional context.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔥</span>
+        <div class="feature-title">Trending Feed</div>
+        <div class="feature-desc">Time-weighted algorithm surfaces the most actively discussed articles within a 48-hour window. Democracy in real time.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title">Civic Polls</div>
+        <div class="feature-desc">Structured polling on constitutional questions — UCC, electoral reform, judicial appointments — with live results.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <div class="feature-title">Role-Based Access</div>
+        <div class="feature-desc">Citizen, Expert, and Lawmaker roles with differentiated permissions. Admin panel for moderation and platform integrity.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- TECH STACK -->
+  <section id="tech">
+    <p class="section-label">Technology</p>
+    <h2 class="section-title">Built on the MERN stack<br/>with production-grade engineering.</h2>
+    <p class="section-body">
+      Containerized with Docker Compose. Deployed on Netlify (frontend) and cloud backend with MongoDB Atlas.
+      Eight software design patterns implemented across the full stack.
+    </p>
+    <div class="tech-grid">
+      <span class="tech-tag highlight">MongoDB</span>
+      <span class="tech-tag highlight">Express.js</span>
+      <span class="tech-tag highlight">React.js</span>
+      <span class="tech-tag highlight">Node.js</span>
+      <span class="tech-tag">Vite</span>
+      <span class="tech-tag">Tailwind CSS</span>
+      <span class="tech-tag">Google Gemini API</span>
+      <span class="tech-tag">Mongoose ODM</span>
+      <span class="tech-tag">React Router</span>
+      <span class="tech-tag">Axios</span>
+      <span class="tech-tag">Netlify</span>
+      <span class="tech-tag">MongoDB Atlas</span>
+      <span class="tech-tag">Vitest</span>
+      <span class="tech-tag">GitHub Actions</span>
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- LEGAL DEFENSE / FAQ -->
+  <section id="legal">
+    <p class="section-label">Legal Standing</p>
+    <h2 class="section-title">We are a medium for citizens' voices.<br/>Not a legislature. Not a petition. A suggestion platform.</h2>
+
+    <div class="defense-intro">
+      <strong>Our platform does not amend the Constitution.</strong> It does not file petitions, does not have any legal effect on any constitutional provision, and does not represent any political position. It is a structured forum where citizens express informed opinions on constitutional matters. That activity is not only legal in India — it is constitutionally protected, constitutionally encouraged, and constitutionally necessary. The difference between our platform and Parliament is the same as the difference between a suggestion box and a legislature.
+    </div>
+
+    <!-- Constitutional Articles -->
+    <p class="section-label" style="margin-top:2rem;">Constitutional Articles That Support Us</p>
+
+    <div class="articles-grid">
+      <div class="article-card">
+        <span class="article-tag">Article 19(1)(a)</span>
+        <div class="article-name">Freedom of Speech and Expression</div>
+        <div class="article-desc">Every citizen has the fundamental right to express opinions on matters of public importance, including the Constitution. Our platform is a structured medium for that expression, no different from a newspaper that publishes op-eds on constitutional reform.</div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">Article 19(1)(b)</span>
+        <div class="article-name">Freedom to Assemble Peacefully</div>
+        <div class="article-desc">Our platform is a digital assembly — citizens gathering to exchange views on constitutional questions. The Supreme Court has held that digital spaces are extensions of traditional public forums for free expression.</div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">Article 19(1)(c)</span>
+        <div class="article-name">Freedom to Form Associations</div>
+        <div class="article-desc">Our platform creates a voluntary community of citizens interested in constitutional literacy and reform discourse. Participating in such a community is a fully protected associational activity.</div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">Article 51A(b)(h)(j)</span>
+        <div class="article-name">Fundamental Duties of Citizens</div>
+        <div class="article-desc">Article 51A(h) makes it a citizen's duty to develop the scientific temper and the spirit of inquiry and reform. Our platform directly operationalizes this duty. We are helping citizens fulfill their constitutional obligations, not just exercise rights.</div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">Article 38</span>
+        <div class="article-name">State to Secure Social Order for Welfare</div>
+        <div class="article-desc">Article 38 directs the State to minimize inequalities and ensure justice informs all national institutions. Our platform gives marginalized voices equal access to constitutional discourse, something traditional amendment processes do not provide.</div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">Article 368</span>
+        <div class="article-name">The Amendment Process Itself</div>
+        <div class="article-desc">Article 368 defines exactly how amendments happen: through Parliament, through a special majority. Our platform does none of this. The gap between citizen opinion and constitutional amendment is enormous and legally absolute. We operate entirely in the opinion space.</div>
+      </div>
+    </div>
+
+    <!-- Supporting Laws -->
+    <p class="section-label" style="margin-top:2.5rem;">Laws and Frameworks That Explicitly Support Us</p>
+
+    <div class="laws-list">
+      <div class="law-row">
+        <span class="law-badge">IT Act 2000</span>
+        <div class="law-content">
+          <div class="law-name">Information Technology Act 2000 and IT Rules 2021</div>
+          <div class="law-desc">Our platform is an intermediary under the IT Act. We do not generate harmful content and we provide a grievance redressal mechanism through our admin and reporting system. The IT Rules 2021 require content moderation — we have built exactly that with our admin panel, reporting system, and immutable post policy.</div>
+        </div>
+      </div>
+      <div class="law-row">
+        <span class="law-badge">RTI 2005</span>
+        <div class="law-content">
+          <div class="law-name">Right to Information Act 2005</div>
+          <div class="law-desc">RTI established that citizens have a right to participate in governance through information access. Our platform is the next logical step: not just accessing information about the Constitution but engaging with it. The spirit of RTI directly supports what we have built.</div>
+        </div>
+      </div>
+      <div class="law-row">
+        <span class="law-badge">NCRWC 2002</span>
+        <div class="law-content">
+          <div class="law-name">National Commission to Review the Working of the Constitution</div>
+          <div class="law-desc">This government-appointed Venkatachaliah Commission explicitly recommended greater public participation in constitutional processes. We have built the educational prototype of the infrastructure that commission called for. We are not doing anything the government itself has not already validated.</div>
+        </div>
+      </div>
+      <div class="law-row">
+        <span class="law-badge">Law Commission</span>
+        <div class="law-content">
+          <div class="law-name">Law Commission of India — Consultation Papers</div>
+          <div class="law-desc">The Law Commission has repeatedly published consultation papers inviting public opinion on constitutional matters, from the Uniform Civil Code to electoral reforms. Our platform is a permanent, structured version of what the Law Commission does temporarily through PDF consultations.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <p class="section-label" style="margin-top:2.5rem;">Frequently Asked Questions</p>
+
+    <div class="faq-list">
+      <details>
+        <summary>Are you encouraging people to change the Constitution?</summary>
+        <div class="faq-answer">
+          <p>No. We are encouraging people to <strong>discuss</strong> the Constitution, which is a fundamental right under Article 19(1)(a) and a fundamental duty under Article 51A(h). Discussion is not amendment. Every law school, newspaper editorial board, and parliamentary debate does the same. Our platform structures that discussion and makes it accessible to citizens who cannot afford law school.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What if someone posts seditious or anti-national content?</summary>
+        <div class="faq-answer">
+          <p>Our platform has three layers of protection. First, posts are publicly visible and immutable, which creates natural accountability — users know their statements are permanent and cannot be deleted. Second, we have a community reporting mechanism that flags problematic content for admin review. Third, our admin panel allows us to hide posts that violate guidelines.</p>
+          <p>We have built more accountability into our system than most social media platforms. Additionally, the Supreme Court in S.G. Vombatkere v. Union of India (2022) effectively suspended Section 124A (sedition), and the new Bharatiya Nyaya Sanhita does not include sedition in its original form.</p>
+        </div>
+      </details>
+      <details>
+        <summary>This is a government matter — why are students building this?</summary>
+        <div class="faq-answer">
+          <p>The Constituent Assembly Debates, which produced the Constitution, were full of ordinary citizens, lawyers, teachers, and social workers — not just government officials. The Constitution itself begins with "We the People of India." Our platform returns constitutional ownership to the people it belongs to.</p>
+          <p>We are not interfering with government. We are fulfilling the democratic promise the Constitution makes to citizens. The National Commission to Review the Working of the Constitution in 2002 explicitly recommended exactly this kind of public participation infrastructure.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Could NiyamAI give incorrect legal information?</summary>
+        <div class="faq-answer">
+          <p>NiyamAI explicitly operates as an <strong>informational assistant, not a legal advisor</strong>. Every AI system that provides legal information — from government e-courts portals to legal aid websites — carries this disclaimer. Our system prompt constrains NiyamAI to constitutional content only, preventing responses on unrelated topics. The platform's disclaimer makes clear this is an educational tool and not a substitute for qualified legal advice.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is this a political platform?</summary>
+        <div class="faq-answer">
+          <p>Constitutional discourse is <strong>civic, not political</strong>. We do not support any political party, candidate, or ideology. Our platform covers all constitutional articles equally. The trending algorithm surfaces posts based on engagement, not political leaning. We are closer to a constitutional encyclopedia with a discussion forum than to any political platform.</p>
+          <p>The platform explicitly prohibits partisan content in its guidelines, and the admin panel allows removal of any post that promotes a political agenda rather than engaging with the constitutional question on its merits.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Does the platform have any legal effect on the Constitution?</summary>
+        <div class="faq-answer">
+          <p><strong>None whatsoever.</strong> Votes on our platform are expressions of opinion, not legal votes. Posts are citizen statements, not petitions to any court or legislature. No action on our platform has any connection to the formal amendment process defined in Article 368. The platform is a digital public square for constitutional literacy — nothing more and nothing less.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do you handle user privacy and data?</summary>
+        <div class="faq-answer">
+          <p>User identities on the platform are represented by randomly generated 8-character IDs rather than real names, protecting personal identity in public discourse. Expert and Lawmaker accounts require verified credentials managed securely. The platform stores only the minimum data necessary for its function. As an educational project, no data is shared with third parties and no commercial profiling takes place.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- One paragraph defense -->
+    <div class="defense-para">
+      India's Constitution begins with "We the People" but for 75 years, the people have had no structured way to engage with it. Our platform gives citizens a read-only view plus an opinion layer — exactly like a public library that also has a suggestion board. We do not amend, we do not petition, we do not lobby. We collect and organize citizen voices. Article 19(1)(a) protects the right to express those voices. Article 51A(h) makes it a citizen's duty to pursue the spirit of inquiry and reform. The National Commission to Review the Working of the Constitution in 2002 explicitly recommended more public participation in constitutional processes. We have built the educational prototype of that participation infrastructure. Everything on our platform is an opinion, and expressing opinions on public matters is the oldest and most protected form of free speech in any democracy.
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- OUR STORY -->
+  <section id="story">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">From brainstorming six ideas<br/>to winning bronze at Innovista 2.0.</h2>
+    <div class="linkedin-card">
+      <div class="linkedin-text"><strong>Bronze at Innovista 2.0: Building Digital Democracy</strong>
+
+Thrilled to announce that Team D-05 secured 3rd place at Innovista 2.0 (28th November 2025), the Minor Project Exhibit by the Department of CSE and CSE (AI and ML), NIE Mysuru!
+
+<strong>The Challenge</strong>
+India's Constitution: 448 Articles, 12 Schedules. Since 1950, only 106 amendments (avg. 1.5/year). As society evolves rapidly, constitutional reform must become more participatory, transparent, and accessible.
+
+<strong>Our Solution</strong>
+A GitHub-inspired civic engagement platform where democracy meets open-source collaboration — Constitution Repository, Citizen Suggestions, Immutable Discussions, AI Constitutional Guide, Expert Validation, and Admin Monitoring.
+
+<strong>The Journey</strong>
+From brainstorming 6 unique ideas to building a working prototype — we explored user stories, system architecture, and real-world implementation challenges.
+
+<em>This project taught us that building for democracy requires more than code — it demands responsibility by design. Every feature asks: "How do we ensure accountability?" Democracy should not be a spectator sport.</em>
+
+<strong>What is Next</strong>
+DigiLocker Integration · Automated Document Verification · ML Opinion Summarizer · Government Collaboration</div>
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- QR CODES -->
+  <section id="demo">
+    <p class="section-label">Scan and Explore</p>
+    <h2 class="section-title">Try it yourself.</h2>
+    <p class="section-body">Scan either QR code to explore the live platform or browse the source code on GitHub.</p>
+      <div class="qr-card">
+        <div id="qr-live"></div>
+        <div class="qr-title">Live Platform</div>
+        <div class="qr-url">d-05-minor-project.netlify.app</div>
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+
+  <!-- TEAM -->
+  <section id="team">
+    <p class="section-label">The Team</p>
+    <h2 class="section-title">Batch D-05 &nbsp;·&nbsp; NIE Mysuru<br/>Department of Computer Science and Engineering</h2>
+    <p class="section-body" style="margin-bottom:0">Guided by <strong>Dr. Usha M S</strong>, Associate Professor, CSE, National Institute of Engineering, Mysuru.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">S</div>
+        <div class="team-name">Sujan Deep H</div>
+        <div class="team-role">Full-Stack Developer & AI Integrator</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">S</div>
+        <div class="team-name">Sujan Kumar Senapati</div>
+        <div class="team-role">Front-end Developer</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">S</div>
+        <div class="team-name">Sujay Niranjan Naik</div>
+        <div class="team-role">Frontend and UI/UX Designer</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">V</div>
+        <div class="team-name">Varun D Magar</div>
+        <div class="team-role">Full-Stack Architect</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"><hr/></div>
+  <footer>
+    <div class="footer-left">
+      V4 VIKSIT BHARAT &nbsp;·&nbsp; NIE MYSURU &nbsp;·&nbsp; CSE 2023-27<br/>
+
+    </div>
+    <div class="footer-right">
+      Made in Bharat &nbsp;<span class="footer-flag">🇮🇳</span>&nbsp; for the country to progress faster.<br/>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ink-muted)">
+        &copy; 2026 Digital Constitutional Amendment Suggestion Platform. Educational use only.
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new QRCode(document.getElementById('qr-live'), {
+        text: 'https://d-05-minor-project.netlify.app',
+        width: 160, height: 160,
+        colorDark: '#14213d', colorLight: '#faf9f6',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      new QRCode(document.getElementById('qr-github'), {
+        text: 'https://github.com/sujandeeph/D-05-minor-project',
+        width: 160, height: 160,
+        colorDark: '#14213d', colorLight: '#faf9f6',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    });
+  </script>
+
+</body>
+</html>
